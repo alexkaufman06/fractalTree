@@ -1,15 +1,32 @@
-var canvas;
+var slider;
 
 function setup() {
   createCanvas(window.innerWidth, window.innerHeight);
+  slider = createSlider(0, TWO_PI, PI/4, 0.01);
 }
 
 function draw() {
   var middle = width / 2;
-  var trunk = height / 1.3;
+  var length = height / 4;
   background(51);
+  translate(middle, height);
   stroke(255);
-  line(middle, height, middle, trunk);
+  branch(length);
+}
+
+function branch(length) {
+  line(0, 0, 0, -length);
+  translate(0, -length);
+  if (length > 1) {
+    push();
+    rotate(slider.value());
+    branch(length * 0.67);
+    pop();
+    push();
+    rotate(-slider.value());
+    branch(length * 0.67);
+    pop();
+  }
 }
 
 function windowResized() {
