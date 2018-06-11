@@ -5,7 +5,7 @@ function setup() {
   createCanvas(window.innerWidth, window.innerHeight);
   angle = PI;
   angleSwitchDown = false
-  slider = createSlider(0, .005, .001, .001);
+  slider = createSlider(0, .005, .001, .0001);
 }
 
 function draw() {
@@ -27,7 +27,6 @@ function draw() {
   } else {
     angle -= slider.value();
   }
-
 }
 
 function branch(length) {
