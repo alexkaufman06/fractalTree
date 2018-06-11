@@ -1,8 +1,11 @@
+var angle;
 var slider;
 
 function setup() {
   createCanvas(window.innerWidth, window.innerHeight);
-  slider = createSlider(0, TWO_PI, PI/4, 0.01);
+  angle = PI;
+  angleSwitchDown = false
+  slider = createSlider(0, .005, .001, .001);
 }
 
 function draw() {
@@ -12,18 +15,31 @@ function draw() {
   translate(middle, height);
   stroke(255);
   branch(length);
+
+  if (angle == 0) {
+    angleSwitchDown = false;
+  } else if (angle == 6.28) {
+    angleSwitchDown = true;
+  }
+
+  if (angleSwitchDown) {
+    angle += slider.value();
+  } else {
+    angle -= slider.value();
+  }
+
 }
 
 function branch(length) {
   line(0, 0, 0, -length);
   translate(0, -length);
-  if (length > 1) {
+  if (length > 4) {
     push();
-    rotate(slider.value());
+    rotate(angle);
     branch(length * 0.67);
     pop();
     push();
-    rotate(-slider.value());
+    rotate(-angle);
     branch(length * 0.67);
     pop();
   }
