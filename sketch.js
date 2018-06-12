@@ -6,12 +6,14 @@ function setup() {
   angle = PI;
   angleSwitchDown = false
   slider = createSlider(0, .005, .001, .0001);
+  slider.position(20,20);
 }
 
 function draw() {
   var middle = width / 2;
   var length = height / 4;
   background(51);
+  text("Growth Speed", slider.x * 2 + slider.width, 35);
   translate(middle, height);
   stroke(255);
   branch(length);
